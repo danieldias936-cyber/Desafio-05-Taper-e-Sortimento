@@ -126,12 +126,12 @@ linhas[[3]] <- data.frame(
 )
 
 ajuste_taper <- bind_rows(linhas)
-dir.create("saidas", showWarnings = FALSE)
-write.csv(ajuste_taper, "saidas/ajuste_taper.csv", row.names = FALSE)
+dir.create("resultados/tabelas", recursive = TRUE, showWarnings = FALSE)
+write.csv(ajuste_taper, "resultados/tabelas/ajuste_taper.csv", row.names = FALSE)
 
 # --- 6. Analise grafica dos residuos ----------------------------------------
 
-dir.create("figuras", showWarnings = FALSE)
+dir.create("resultados/figuras", recursive = TRUE, showWarnings = FALSE)
 
 cub_res <- cub %>%
   mutate(
@@ -155,7 +155,7 @@ p_res_Z <- ggplot(cub_res, aes(x = Z, y = residuo)) +
   labs(x = "Altura relativa (Z = hi/HT)", y = "Residuo (di obs - di pred, cm)",
        title = "Residuos ao longo do perfil do fuste, por modelo") +
   theme_bw()
-ggsave("figuras/residuos_vs_Z.png", p_res_Z, width = 9, height = 4, dpi = 150)
+ggsave("resultados/figuras/residuos_vs_Z.png", p_res_Z, width = 9, height = 4, dpi = 150, bg = "white")
 
 p_res_dap <- ggplot(cub_res, aes(x = classe_dap, y = residuo)) +
   geom_boxplot() +
@@ -165,7 +165,7 @@ p_res_dap <- ggplot(cub_res, aes(x = classe_dap, y = residuo)) +
        title = "Residuos por classe de DAP, por modelo") +
   theme_bw() +
   theme(axis.text.x = element_text(angle = 20, hjust = 1))
-ggsave("figuras/residuos_vs_classeDAP.png", p_res_dap, width = 9, height = 4, dpi = 150)
+ggsave("resultados/figuras/residuos_vs_classeDAP.png", p_res_dap, width = 9, height = 4, dpi = 150, bg = "white")
 
 # --- 7. Selecao do melhor modelo ---------------------------------------------
 
@@ -189,7 +189,7 @@ coefs_para_etapa2 <- list(
   expoentes_hradetzky = expoentes_hradetzky,
   melhor_modelo = melhor_modelo
 )
-saveRDS(coefs_para_etapa2, "saidas/coefs_taper.rds")
+saveRDS(coefs_para_etapa2, "resultados/tabelas/coefs_taper.rds")
 
-cat("\nArquivos gerados em saidas/: ajuste_taper.csv, coefs_taper.rds\n")
-cat("Figuras geradas em figuras/: residuos_vs_Z.png, residuos_vs_classeDAP.png\n")
+cat("\nArquivos gerados em resultados/tabelas/: ajuste_taper.csv, coefs_taper.rds\n")
+cat("Figuras geradas em resultados/figuras/: residuos_vs_Z.png, residuos_vs_classeDAP.png\n")

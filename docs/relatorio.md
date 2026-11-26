@@ -20,7 +20,7 @@ escala transformada de cada modelo, para permitir comparação direta.
 O Hradetzky apresenta o melhor ajuste nos três critérios simultaneamente,
 mesmo descontando o parâmetro extra em relação ao Schöpfer.
 
-**Análise gráfica dos resíduos** (`figuras/residuos_vs_Z.png`): o Kozak exibe
+**Análise gráfica dos resíduos** (`resultados/figuras/residuos_vs_Z.png`): o Kozak exibe
 um padrão sistemático nítido — resíduos positivos concentrados perto da base
 do fuste (Z → 0, onde o modelo subestima o diâmetro real) e resíduos
 fortemente negativos perto do topo (Z → 1, onde superestima), formando um
@@ -29,7 +29,7 @@ curva de afilamento com inflexões que ele não consegue capturar. Schöpfer e
 Hradetzky não mostram esse padrão de tendência; os resíduos ficam
 razoavelmente centrados em zero ao longo de todo o perfil relativo.
 
-Por classe de DAP (`figuras/residuos_vs_classeDAP.png`), o Kozak também
+Por classe de DAP (`resultados/figuras/residuos_vs_classeDAP.png`), o Kozak também
 mantém maior dispersão e viés nas árvores de maior diâmetro (classe
 14,4–18,8 cm), enquanto Hradetzky e Schöpfer se comportam de forma mais
 estável entre classes.
@@ -69,7 +69,7 @@ calculando o volume de cada tora por integração da função de taper, obteve-s
 | Schöpfer  | Residual      | —           | 8,73            |
 | **Schöpfer — total** |    |             | **224,90**      |
 
-(ver `figuras/comparacao_volume_produto.png` e `comparacao_toras_produto.png`)
+(ver `resultados/figuras/comparacao_volume_produto.png` e `comparacao_toras_produto.png`)
 
 ### Comparação com o modelo de referência (Hradetzky)
 
