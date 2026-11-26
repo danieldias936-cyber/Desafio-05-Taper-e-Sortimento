@@ -11,7 +11,7 @@ source("scripts/00_funcoes_taper.R")
 
 # --- 1. Entradas -------------------------------------------------------------
 
-coefs_taper <- readRDS("saidas/coefs_taper.rds")
+coefs_taper <- readRDS("resultados/tabelas/coefs_taper.rds")
 
 inv <- read_excel("dados/inventario_completo.xlsx")
 names(inv) <- c("filial","idade","regime","espacamento","clone","mes_plantio",
@@ -110,8 +110,8 @@ sortimento_por_modelo <- resultado_arvores %>%
   mutate(produto = as.character(produto)) %>%
   select(modelo, produto, n_toras_ha, volume_ha_m3)
 
-dir.create("saidas", showWarnings = FALSE)
-write.csv(sortimento_por_modelo, "saidas/sortimento_por_modelo.csv",
+dir.create("resultados/tabelas", recursive = TRUE, showWarnings = FALSE)
+write.csv(sortimento_por_modelo, "resultados/tabelas/sortimento_por_modelo.csv",
           row.names = FALSE)
 
 cat("\n=== Sortimento por modelo x produto (por hectare) ===\n")
@@ -137,7 +137,7 @@ comparacao_sortimento <- sortimento_por_modelo %>%
   select(modelo, produto, referencia_etapa1, n_toras_ha, volume_ha_m3,
          dif_n_toras_ha, dif_pct_n_toras, dif_volume_ha_m3, dif_pct_volume)
 
-write.csv(comparacao_sortimento, "saidas/comparacao_sortimento.csv",
+write.csv(comparacao_sortimento, "resultados/tabelas/comparacao_sortimento.csv",
           row.names = FALSE)
 
 cat("\n=== Comparacao entre modelos (referencia:", melhor_modelo_etapa1, ") ===\n")
@@ -157,8 +157,8 @@ p_comp <- ggplot(sortimento_por_modelo,
   theme_bw() +
   theme(axis.text.x = element_text(angle = 15, hjust = 1))
 
-dir.create("figuras", showWarnings = FALSE)
-ggsave("figuras/comparacao_volume_produto.png", p_comp, width = 8, height = 5, dpi = 150)
+dir.create("resultados/figuras", recursive = TRUE, showWarnings = FALSE)
+ggsave("resultados/figuras/comparacao_volume_produto.png", p_comp, width = 8, height = 5, dpi = 150, bg = "white")
 
 p_comp_n <- ggplot(sortimento_por_modelo %>% filter(produto != "residual"),
                     aes(x = factor(produto, levels = produtos_ordem),
@@ -169,7 +169,7 @@ p_comp_n <- ggplot(sortimento_por_modelo %>% filter(produto != "residual"),
        fill = "Modelo") +
   theme_bw() +
   theme(axis.text.x = element_text(angle = 15, hjust = 1))
-ggsave("figuras/comparacao_toras_produto.png", p_comp_n, width = 8, height = 5, dpi = 150)
+ggsave("resultados/figuras/comparacao_toras_produto.png", p_comp_n, width = 8, height = 5, dpi = 150, bg = "white")
 
-cat("\nArquivos gerados em saidas/: sortimento_por_modelo.csv, comparacao_sortimento.csv\n")
-cat("Figuras geradas em figuras/: comparacao_volume_produto.png, comparacao_toras_produto.png\n")
+cat("\nArquivos gerados em resultados/tabelas/: sortimento_por_modelo.csv, comparacao_sortimento.csv\n")
+cat("Figuras geradas em resultados/figuras/: comparacao_volume_produto.png, comparacao_toras_produto.png\n")
